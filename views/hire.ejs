@@ -1,0 +1,133 @@
+<!-- Jason McAuslan -->
+<!-- 301279046 -->
+<!-- June 18th, 2023 -->
+<!-- about_me.ejs -->
+
+<%- include('partials/header.ejs') %>
+
+<%- include('partials/main_nav.ejs') %>
+
+<%- include('partials/page_banner.ejs') %>
+
+<div class="container">
+  <div class="row">
+    <div class="offset-md-4 col-md-4">
+          <h1><%= title %></h1>
+          <form class="form" method="POST">
+          <fieldset>
+            <legend>Personal Info</legend>              
+                <!-- Employee Personal Info -->
+                <div class="form-group">
+                  <label for="firstNameField">First Name</label>
+                  <input type="text" class="form-control" id="firstNameField"
+                  name="firstName" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="lastNameField">Last Name</label>
+                  <input type="text" class="form-control" id="lastNameField"
+                  name="lastName" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="emailField">Email</label>
+                  <input type="text" class="form-control" id="emailField"
+                  name="email" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="phoneField">Phone Number</label>
+                  <input type="text" class="form-control" id="phoneField"
+                  name="phone" required>
+                </div>
+          </fieldset>
+          <br>
+          <fieldset>
+            <legend>Job Info</legend>
+            <div class="form-group">
+              <label for="hireDateField">Hire Date</label>
+              <input type="date" class="form-control" id="hireDateField"
+              name="hireDate" required >
+            </div>
+
+            <div class="form-group">
+              <label for="jobIDField">Job ID</label>
+              <select class="form-control" id="jobIDField"
+              name="jobID" required>
+                <option value="Placeholder">Insert Job Lookup Here</option>
+              </select>
+            </div>
+
+            <!-- Use Lookup Value for Job Title -->
+            <div class="form-group">
+              <label for="jobTitleField">Job Title</label>
+              <input type="text" class="form-control" id="jobTitleField"
+              name="jobTitle" readonly placeholder="Select a Job ID">
+            </div>
+
+            <div class="form-group">
+              <label for="salaryField">Salary</label>
+              <input type="text" class="form-control" id="salaryField"
+              name="salary" required>
+            </div>
+          </fieldset>
+          <br>
+          <fieldset>
+            <legend>Manager</legend>
+            <div class="form-group">
+              <label for="managerIDField">Manager ID</label>
+              <select class="form-control" id="managerIDField"
+              name="managerID" required>
+                <option value="Placeholder">Insert Manager Lookup Here</option>
+              </select>
+            </div>
+
+            <!-- Use Lookup Value for Manager Name -->
+            <div class="form-group">
+              <label for="managerFNameField">First Name</label>
+              <input type="text" class="form-control" id="managerFNameField"
+              name="managerFName" readonly placeholder="Select a Manager ID">
+            </div>
+
+            <div class="form-group">
+              <label for="jobTitleField">Last Name</label>
+              <input type="text" class="form-control" id="jobTitleField"
+              name="jobTitle" readonly placeholder="Select a Manager ID">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Department</legend>
+            <div class="form-group">
+              <label for="deptIDField">Department ID</label>
+              <select class="form-control" id="deptIDField"
+              name="deptID" required>
+                <option value="Placeholder">Insert Department Lookup Here</option>
+              </select>
+            </div>
+
+            <!-- Use Lookup Value for Department Name -->
+            <div class="form-group">
+              <label for="deptNameField">Department Name</label>
+              <input type="text" class="form-control" id="deptNameField"
+              name="deptName" readonly placeholder="Select a Department ID">
+            </div>
+          </fieldset>
+          <br>
+          <button class="btn btn-primary" type="submit">
+              <i class="fas fa-edit"></i> Submit</button>
+
+          <a href="/contact-list" class="btn btn-warning">
+              <i class="fas fa-undo"></i> Cancel</a>
+          
+        </form>
+    </div>
+  </div>
+</div>
+          <script>
+            document.getElementById("hireDateField").valueAsDate = new Date();
+          </script>
+          
+<%- include('partials/bottom_nav.ejs') %>
+
+<%- include('partials/footer.ejs') %>
