@@ -6,7 +6,8 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
 // Database Setup
-let oracledb = require('oracledb');
+const {connectDB} = require('../services/db');
+connectDB();
 
 let indexRouter = require('../routes/index');
 
