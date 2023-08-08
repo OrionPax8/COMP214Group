@@ -1,23 +1,29 @@
 let express = require('express');
 let router = express.Router();
+let indexController = require('../controllers/index');
 
-// Get route for home page
-router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Home'});
-});
+/* GET home page. */
+router.get('/', indexController.getHomePage);
+router.get('/home', indexController.getHomePage);
+router.get('/hire', indexController.getHirePage);
 
-router.get('/home', function (req, res, next) {
-    res.render('index', {title: 'Home'});
-});
+// // Get route for home page
+// router.get('/', function (req, res, next) {
+//     res.render('index', {title: 'Home'});
+// });
 
-// Get route for hire page
-router.get('/hire', function (req, res, next) {
-    res.render('hire', {title: 'Hire Employee'});
-});
+// router.get('/home', function (req, res, next) {
+//     res.render('index', {title: 'Home'});
+// });
 
-// Get route for employee list page
-router.get('/emp-list', function (req, res, next) {
-    res.render('emp-list', {title: 'Employee List'});
-});
+// // Get route for hire page
+// router.get('/hire', function (req, res, next) {
+//     res.render('hire', {title: 'Hire Employee'});
+// });
+
+// // Get route for employee list page
+// router.get('/list', function (req, res, next) {
+//     res.render('list', {title: 'Employee List'});
+// });
 
 module.exports = router;

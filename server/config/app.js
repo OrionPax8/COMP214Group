@@ -1,4 +1,4 @@
-// Installed 3rd party packages
+// Import Dependencies
 let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
@@ -6,10 +6,12 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
 // Database Setup
-const {connectDB} = require('../services/db');
-connectDB();
+// const {connectDB} = require('../services/db');
+// connectDB();
 
+// Set up routes
 let indexRouter = require('../routes/index');
+const employeeRouter = require('../routes/employeeRoute');
 
 let app = express();
 
@@ -25,6 +27,8 @@ app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 app.use('/', indexRouter);
+app.use('/employee', employeeRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
