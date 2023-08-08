@@ -10,7 +10,7 @@ let logger = require('morgan');
 // connectDB();
 
 // Set up routes
-let indexRouter = require('../routes/index');
+const indexRouter = require('../routes/index');
 const employeeRouter = require('../routes/employeeRoute');
 
 let app = express();

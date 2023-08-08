@@ -33,6 +33,30 @@
             <a class="nav-link" aria-current="page" href="/employee"><i class="fa-solid fa-lg"></i> Current Employees</a>
           </li>
 
+          <% if (title == "View Job") { %>
+            <li class="nav-item active">
+          <% } else { %>
+            <li class="nav-item">
+          <% } %>          
+            <a class="nav-link" aria-current="page" href="/getjob"><i class="fa-solid fa-lg"></i> View Job Description</a>
+          </li>
+
+          <% if (title == "Edit Jobs") { %>
+            <li class="nav-item active">
+          <% } else { %>
+            <li class="nav-item">
+          <% } %>          
+            <a class="nav-link" aria-current="page" href="/editjobs"><i class="fa-solid fa-lg"></i> Edit Job Descriptions</a>
+          </li>
+
+          <% if (title == "Create Job") { %>
+            <li class="nav-item active">
+          <% } else { %>
+            <li class="nav-item">
+          <% } %>          
+            <a class="nav-link" aria-current="page" href="/createjob"><i class="fa-solid fa-lg"></i> Create Job</a>
+          </li>
+
       </div>
     </div>
   </nav>
