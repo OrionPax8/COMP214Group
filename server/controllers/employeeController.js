@@ -4,9 +4,10 @@ const {getAllEmployees} = require('../services/db');
 const getEmployeeList = async (req, res, next) => {
   try {
     let employeeList = await getAllEmployees();
-    res.render('employees', {
+    res.render('index', {
       employeeList
-      ,title: 'Employee List' })
+      ,title: 'Employee List'
+      , component: 'employees' })
 
   } catch (err){
     console.log(err);

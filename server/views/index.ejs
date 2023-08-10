@@ -1,15 +1,16 @@
 
+<!-- Header Content  -->
 <%- include('partials/header.ejs') %>
 
 <%- include('partials/main_nav.ejs') %>
 
 <%- include('partials/page_banner.ejs') %>
 
-  <!-- Home Page Content -->
-<div class="container">
-<h1>Welcome to our COMP 214 Group Project</h1>
-<p>Please make use of the navbar for site navigation</p>
-</div>
+  <!-- Body Content -->
+<%- include(`components/${component}`) %>
+
+
+<!-- Footer Content -->
 
 <%- include('partials/bottom_nav.ejs') %>
 

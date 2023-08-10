@@ -3,22 +3,22 @@ exports.getHomePage = function (req, res, next) {
 };
 
 exports.getHirePage = function (req, res, next) {
-    res.render('hire', { title: 'Hire Employee', component: 'hire' });
+    res.render('index', { title: 'Hire Employee', component: 'hire' });
 };
 
 exports.getlistPage = function (req, res, next) {
-    res.render('list', { title: 'Employee List', component: 'list' });
+    res.render('index', { title: 'Employee List', component: 'employees' });
 };
 
 exports.getjobDescPage = function (req, res, next) {
-    res.render('getjob', {title: 'View Job', component: 'desc'});
+    res.render('index', {title: 'View Job', component: 'getjob'});
 };
 
 exports.getJobEditPage = function (req, res, next) {
-    res.render('editjobs', {title: 'Edit Jobs', component: 'editjob'});
+    res.render('index', {title: 'Edit Jobs', component: 'editjobs'});
 };
 
 exports.getCreateJobPage = function (req, res, next) {
-    res.render('createjob', {title: 'Create Job', component: 'create'});
+    res.render('index', {title: 'Create Job', component: 'createjob'});
 };
 
