@@ -11,7 +11,7 @@ exports.getlistPage = function (req, res, next) {
 };
 
 exports.getjobDescPage = function (req, res, next) {
-    res.render('index', {title: 'View Job', component: 'getjob'});
+    res.render('index', {title: 'View Job', component: 'job'});
 };
 
 exports.getJobEditPage = function (req, res, next) {

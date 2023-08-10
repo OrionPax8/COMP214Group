@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>Display Job Details</h1>
+    <div class="form-group">
+        <label for="jobID">Select Job ID:</label>
+        <select class="form-control" id="jobIDSelected" name="jobID" required>
+            <option value="" disabled selected>Select a Job ID</option>
+            <!-- Loop through job IDs from database and create options -->
+            <% for(let i = 0; i < jobList.length; i++) { %>
+                <option value="<%= [jobList[i].JOB_TITLE,jobList[i].MIN_SALARY,jobList[i].MAX_SALARY] %>"><%= jobList[i].JOB_ID %></option>
+                console.log(jobList.MAX_SALARY);
+            <% } %>
+        </select>
+    </div>
+
+        <button type="button" class="btn btn-primary" onclick="displayJobDetail()">Display</button>
+        <div id="jobDetail"> </div>
+</div>
+<script>
+    function displayJobDetail() {
+        const detail = document.getElementById("jobDetail");
+        const e = document.getElementById("jobIDSelected");
+        const selectedJobID = e.value.split(","); // Split the string by commas and into an array
+        console.log(selectedJobID);
+        
+        // Find the job details in jobList using selectedJobID        
+        if (selectedJobID) {
+            detail.innerHTML = `
+                <p><strong>Job Title:</strong> ${selectedJobID[0]}</p>
+                <p><strong>Minimum Salary:</strong> $${selectedJobID[1]}</p>
+                <p><strong>Maximum Salary:</strong> $${selectedJobID[2]}</p>
+            `;
+        } else {
+            detail.innerHTML = "<p>Please select a valid Job ID.</p>";
+        }
+    }
+</script>
