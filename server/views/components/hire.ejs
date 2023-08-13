@@ -43,15 +43,11 @@
               <label for="jobIDField">Job ID</label>
               <select class="form-control" id="jobIDField"
               name="jobID" required>
-                <option value="Placeholder">Insert Job Lookup Here</option>
+                <option value="Placeholder">Select Job Title</option>
+                <% for(let count = 0; count < jobList.length; count++){%>
+                  <option value="<%= jobList[count].JOB_ID %>"><%= jobList[count].JOB_TITLE %></option>
+                <% }%>
               </select>
-            </div>
-
-            <!-- Use Lookup Value for Job Title -->
-            <div class="form-group">
-              <label for="jobTitleField">Job Title</label>
-              <input type="text" class="form-control" id="jobTitleField"
-              name="jobTitle" readonly placeholder="Select a Job ID">
             </div>
 
             <div class="form-group">
@@ -64,52 +60,38 @@
           <fieldset>
             <legend>Manager</legend>
             <div class="form-group">
-              <label for="managerIDField">Manager ID</label>
-              <select class="form-control" id="managerIDField"
-              name="managerID" required>
-                <option value="Placeholder">Insert Manager Lookup Here</option>
+              <label for="managerNameField">Manager Name</label>
+              <select class="form-control" id="managerNameField"
+              name="managerName" required>
+                <option value="Placeholder">Select Manager Name</option>
+                <% for(let count = 0; count < managerList.length; count++){%>
+                  <option value="<%= managerList[count].EMPLOYEE_ID %>"><%= managerList[count].LAST_NAME %>, <%= managerList[count].FIRST_NAME %></option>
+                <% }%>
               </select>
             </div>
 
-            <!-- Use Lookup Value for Manager Name -->
+            <fieldset>
+            <legend>Department</legend>
             <div class="form-group">
-              <label for="managerFNameField">First Name</label>
-              <input type="text" class="form-control" id="managerFNameField"
-              name="managerFName" readonly placeholder="Select a Manager ID">
-            </div>
-
-            <div class="form-group">
-              <label for="jobTitleField">Last Name</label>
-              <input type="text" class="form-control" id="jobTitleField"
-              name="jobTitle" readonly placeholder="Select a Manager ID">
+              <label for="deptNameField">Department</label>
+              <select class="form-control" id="deptNameField"
+              name="deptName" required>
+                <option value="Placeholder">Select Department</option>
+                <% for(let count = 0; count < departmentList.length; count++){%>
+                  <option value="<%= departmentList[count].DEPARTMENT_ID %>"><%= departmentList[count].DEPARTMENT_NAME %></option>
+                <% }%>
+              </select>
             </div>
           </fieldset>
 
           <fieldset>
-            <legend>Department</legend>
-            <div class="form-group">
-              <label for="deptIDField">Department ID</label>
-              <select class="form-control" id="deptIDField"
-              name="deptID" required>
-                <option value="Placeholder">Insert Department Lookup Here</option>
-              </select>
-            </div>
-
-            <!-- Use Lookup Value for Department Name -->
-            <div class="form-group">
-              <label for="deptNameField">Department Name</label>
-              <input type="text" class="form-control" id="deptNameField"
-              name="deptName" readonly placeholder="Select a Department ID">
-            </div>
-          </fieldset>
           <br>
-          <button class="btn btn-primary" type="submit">
-              <i class="fas fa-edit"></i> Submit</button>
+          <button class="btn btn-primary" type="submit"> Submit</button>
 
-          <a href="/contact-list" class="btn btn-warning">
-              <i class="fas fa-undo"></i> Cancel</a>
-          
+          <a href="/contact-list" class="btn btn-warning"> Cancel</a>
+          </fieldset>
         </form>
+        <br><br><br><br>
     </div>
   </div>
 </div>

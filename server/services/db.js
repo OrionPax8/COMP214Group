@@ -2,6 +2,8 @@
 const oracledb = require('oracledb');
 const employeeModel = require('../models/employee');
 const jobModel = require('../models/job');
+const managerModel = require('../models/manager');
+const departmentModel = require('../models/department');
 
 const dbConfig = {
     user: 'COMP214_m23_er_78',
@@ -75,5 +77,67 @@ const dbConfig = {
     }
   }
 
+  async function getManagers() {
+    let connection;
 
-module.exports = { getAllEmployees, getAllJobs };
+    try {
+        connection = await oracledb.getConnection(dbConfig);
+
+        const sql = 'SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME FROM HR_EMPLOYEES';
+        const result = await connection.execute(sql, binds, options);
+        const rs = result.resultSet;
+        const managerList = [];
+        let row;
+
+        while ((row = await rs.getRow())) {
+          managerList.push(new managerModel(row));
+            }
+        await rs.close();
+      return managerList;
+    } catch (error) {
+      console.error('Error retrieving jobs:', error);
+      throw error;
+    } finally {
+      if (connection) {
+        try {
+          await connection.close();
+        } catch (error) {
+          console.error('Error closing connection:', error);
+        }
+      }
+    }
+  }
+
+  async function getDepartments() {
+    let connection;
+
+    try {
+        connection = await oracledb.getConnection(dbConfig);
+
+        const sql = 'SELECT DEPARTMENT_ID, DEPARTMENT_NAME FROM HR_DEPARTMENTS';
+        const result = await connection.execute(sql, binds, options);
+        const rs = result.resultSet;
+        const departmentList = [];
+        let row;
+
+        while ((row = await rs.getRow())) {
+          departmentList.push(new departmentModel(row));
+            }
+        await rs.close();
+      return departmentList;
+    } catch (error) {
+      console.error('Error retrieving jobs:', error);
+      throw error;
+    } finally {
+      if (connection) {
+        try {
+          await connection.close();
+        } catch (error) {
+          console.error('Error closing connection:', error);
+        }
+      }
+    }
+  }
+
+
+module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments };

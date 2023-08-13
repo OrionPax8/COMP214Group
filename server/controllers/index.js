@@ -2,14 +2,6 @@ exports.getHomePage = function (req, res, next) {
     res.render('index', { title: 'Home', component: 'home' });
 };
 
-exports.getHirePage = function (req, res, next) {
-    res.render('index', { title: 'Hire Employee', component: 'hire' });
-};
-
-exports.getlistPage = function (req, res, next) {
-    res.render('index', { title: 'Employee List', component: 'employees' });
-};
-
 exports.getjobDescPage = function (req, res, next) {
     res.render('index', {title: 'View Job', component: 'job'});
 };
