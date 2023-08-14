@@ -18,19 +18,19 @@
                     </tr>
                 </thead>
             
-            <!--<tbody>
-            <%// for(let count = 0; count < employeeList.length; count++){%>
+            <tbody>
+            <% for(let count = 0; count < jobList.length; count++){%>
             <tr> 
-                <td> <input type="text" class="form control" id="jobID<%// count %>" value="<%//= employeeList[count].EMPLOYEE_ID %>"></td>
-                <td> <input type="text" class="form control" id="jobTitle<%// count %>" value="<%//= employeeList[count].FIRST_NAME %></td>
-                <td> <input type="text" class="form control" id="minSal<%// count %>" value="<%//= employeeList[count].LAST_NAME %></td>
-                <td> <input type="text" class="form control" id="maxSal<%// count %>" value="<%//= employeeList[count].EMAIL %></td>
+                <td> <%= jobList[count].JOB_ID %> </td>
+                <td> <input type="text" class="form control" id="jobTitle<% count %>" value="<%= jobList[count].JOB_TITLE %>"></td>
+                <td> <input type="text" class="form control" id="minSal<% count %>" value="<%= jobList[count].MIN_SALARY %>"></td>
+                <td> <input type="text" class="form control" id="maxSal<% count %>" value="<%= jobList[count].MAX_SALARY %>"></td>
                 <td> <a href="#" class="btn btn-primary">Update</a></td>
                 <td><form action="#" method="POST"><button type="submit" class="btn btn-danger">Delete</button></form></td>
             </tr>
-            <% //} %>
+            <% } %>
             </tbody>
-            -->
+            
             </table>
         </div>
     </div>

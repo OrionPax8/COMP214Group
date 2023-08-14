@@ -15,4 +15,19 @@ const getJobList = async (req, res, next) => {
   
   }
 
-module.exports = { getJobList };
+  const getJobEditPage = async (req, res, next) => {
+    let jobList = await getAllJobs();
+    try {      
+      res.render('index', {
+        jobList
+        ,title: 'Edit Jobs'
+        ,component: 'editjobs' })
+  
+    } catch (err){
+      console.log(err);
+  
+    }
+  
+  }
+
+module.exports = { getJobList, getJobEditPage };
