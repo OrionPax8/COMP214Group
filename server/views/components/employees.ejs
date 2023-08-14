@@ -18,8 +18,6 @@
                     <th>Hire Date</th>
                     <th>Job ID</th>
                     <th>Salary</th>
-                    <th>Manager ID</th>
-                    <th>Department ID</th>
                     <th></th>
                     <th></th>
                     </tr>
@@ -31,14 +29,11 @@
                 <td> <%= employeeList[count].EMPLOYEE_ID %></td>
                 <td> <%= employeeList[count].FIRST_NAME %></td>
                 <td> <%= employeeList[count].LAST_NAME %></td>
-                <td> <%= employeeList[count].EMAIL %></td>
-                <td> <%= employeeList[count].PHONE_NUMBER %></td>
-                <td> <%= employeeList[count].HIRE_DATE %></td>
+                <td> <input type="text" class="form-control" id="email<%= count %>" value="<%= employeeList[count].EMAIL %>"></td>
+                <td> <input type="text" class="form-control" id="phone<%= count %>" value="<%= employeeList[count].PHONE_NUMBER %>"></td>
+                <td> <%= employeeList[count].HIRE_DATE.toLocaleDateString('el-GR') %></td>
                 <td> <%= employeeList[count].JOB_ID %></td>
-                <td> <%= employeeList[count].SALARY %></td>
-                <td> <%= employeeList[count].COMMISSION_PCT %></td>
-                <td> <%= employeeList[count].MANAGER_ID %></td>
-                <td> <%= employeeList[count].DEPARTMENT_ID %></td>
+                <td> <input type="text" class="form-control" id="salary<%= count %>" value="<%= employeeList[count].SALARY %>"></td>
                 <td> <a href="#" class="btn btn-primary">Update</a></td>
                 <td><form action="#" method="POST"><button type="submit" class="btn btn-danger">Delete</button></form></td>
             </tr>
