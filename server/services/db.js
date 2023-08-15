@@ -145,11 +145,6 @@ const dbConfig = {
     let salary = +employee.SALARY;
     let managerID = +employee.MANAGER_ID;
     let deptID = +employee.DEPARTMENT_ID;
-    console.log(employee);
-    console.log(hireDate);
-    console.log(salary);
-    console.log(managerID);
-    console.log(deptID);
 
     try {
         connection = await oracledb.getConnection(dbConfig);
@@ -229,4 +224,26 @@ const dbConfig = {
   }
 
 
-module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, createJob };
+
+async function updateEmployee(employee){
+  let connection;
+  let salary = +employee.SALARY;
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(
+      } catch (error) {
+        console.error('Error inserting employee:', error);
+        throw error;
+      } finally {
+        if (connection) {
+          try {
+            await connection.close();
+          } catch (error) {
+            console.error('Error closing connection:', error);
+          }
+        }
+      }
+  }
+
+module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, updateEmployee, createJob };
