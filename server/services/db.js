@@ -196,7 +196,7 @@ const dbConfig = {
         {// bind variables
           p_job_id: {dir: oracledb.BIND_IN, val: job.JOB_ID, type:oracledb.STRING},
           p_job_title: {dir: oracledb.BIND_IN, val: job.JOB_TITLE, type:oracledb.STRING},
-          p_min_salary: {dir: oracledb.BIND_IN, val: minSal, type:oracledb.NUMBER},
+          p_min_salary: {dir: oracledb.BIND_IN, val: minSal, type:oracledb.NUMBER}
         }
       );
 
@@ -221,12 +221,13 @@ async function updateEmployee(employee){
   let connection;
   let salary = +employee.SALARY;
   let empID = +employee.EMPLOYEE_ID;
+
   try {
     connection = await oracledb.getConnection(dbConfig);
 
     const result = await connection.execute(
       `BEGIN
-        update_employee(:p_employee_id, :p_salary, :p_email, :p_phone)
+        update_employee(:p_employee_id, :p_salary, :p_email, :p_phone);
       END;`,
       {// bind variables
         p_employee_id: {dir: oracledb.BIND_IN, val: empID, type: oracledb.NUMBER},
@@ -249,4 +250,38 @@ async function updateEmployee(employee){
       }
   }
 
-module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, updateEmployee, createJob };
+  async function updateJob(job){
+    let connection;
+    let minSal = +job.MIN_SALARY;
+    let maxSal = +job.MAX_SALARY;
+
+    try {
+      connection = await oracledb.getConnection(dbConfig);
+  
+      const result = await connection.execute(
+        `BEGIN
+          Employee_edit_job_sp(:p_job_id, :p_job_title, :p_min_salary, :p_max_salary);
+        END;`,
+        {// bind variables
+          p_job_id: {dir: oracledb.BIND_IN, val: job.JOB_ID, type:oracledb.STRING},
+          p_job_title: {dir: oracledb.BIND_IN, val: job.JOB_TITLE, type:oracledb.STRING},
+          p_min_salary: {dir: oracledb.BIND_IN, val: minSal, type:oracledb.NUMBER},
+          p_max_salary: {dir: oracledb.BIND_IN, val: maxSal, type:oracledb.NUMBER}
+        }
+      );
+      console.log("Jobs Updated " + result.rowsAffected);
+    } catch (error) {
+      console.error('Error inserting employee:', error);
+      throw error;
+    } finally {
+      if (connection) {
+        try {
+          await connection.close();
+        } catch (error) {
+          console.error('Error closing connection:', error);
+        }
+      }
+    }
+}
+
+module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, updateEmployee, createJob, updateJob };

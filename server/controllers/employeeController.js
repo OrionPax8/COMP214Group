@@ -61,10 +61,6 @@ const postEmployeeListPage = async (req,res,next) =>{
 
   let id = req.params.id;
 
-  console.log(req.body);
-  console.log(req.body.salaryField);
-
-
   
 
   let employeeToUpdate = new Employee({

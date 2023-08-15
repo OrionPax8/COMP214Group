@@ -1,23 +1,8 @@
 const Job = require('../models/job');
 const jobModel = require('../models/job');
 const job = jobModel.Job;
-const {getAllJobs, createJob} = require('../services/db');
+const {getAllJobs, createJob, updateJob} = require('../services/db');
 
-
-const getJobList = async (req, res, next) => {
-    let jobList = await getAllJobs();
-    try {      
-      res.render('index', {
-        jobList
-        ,title: 'Job Description'
-        ,component: 'job' })
-  
-    } catch (err){
-      console.log(err);
-  
-    }
-  
-  }
 
   const getJobEditPage = async (req, res, next) => {
     let jobList = await getAllJobs();
@@ -33,7 +18,22 @@ const getJobList = async (req, res, next) => {
     }
   }
 
+  const postJobEditPage = async (req, res, next) =>{
+    let id = req.params.id;
+    
+    let jobToUpdate = new Job({
+      JOB_ID: id,
+      JOB_TITLE: req.body.jobTitleField,
+      MIN_SALARY: req.body.minSalaryField,
+      MAX_SALARY: req.body.maxSalaryField
+    });
+
+    updateJob(jobToUpdate);
+  }
+
   const getCreateJobPage = async (req, res, next) => {
+
+    let jobList = await getAllJobs();
     try {      
       res.render('index', {
         jobList
@@ -48,7 +48,7 @@ const getJobList = async (req, res, next) => {
 
   const postCreateJobPage = async (req, res, next) =>{
 
-    let newJob = new Job({
+    let newJob = new job({
       JOB_ID: req.body.jobID,
       JOB_TITLE: req.body.jobTitle,
       MIN_SALARY: req.body.minSal,
@@ -73,4 +73,4 @@ const getJobList = async (req, res, next) => {
     }
   }
 
-module.exports = { getJobList, getJobEditPage, getCreateJobPage, postCreateJobPage, getViewJobPage };
+module.exports = { getJobEditPage, getCreateJobPage, postCreateJobPage, getViewJobPage, postJobEditPage };

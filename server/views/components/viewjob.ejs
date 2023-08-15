@@ -7,7 +7,6 @@
             <!-- Loop through job IDs from database and create options -->
             <% for(let i = 0; i < jobList.length; i++) { %>
                 <option value="<%= [jobList[i].JOB_TITLE,jobList[i].MIN_SALARY,jobList[i].MAX_SALARY] %>"><%= jobList[i].JOB_ID %></option>
-                console.log(jobList.MAX_SALARY);
             <% } %>
         </select>
     </div>

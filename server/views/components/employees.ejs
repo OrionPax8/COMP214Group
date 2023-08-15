@@ -34,7 +34,7 @@
                 <td> <%= employeeList[count].HIRE_DATE.toLocaleDateString('el-GR') %></td>
                 <td> <%= employeeList[count].JOB_ID %></td>
                 <td> <input type="text" class="form-control" id="salary<%= employeeList[count].EMPLOYEE_ID %>" name="salaryField" value="<%= employeeList[count].SALARY %>"></td>
-                <td> <button id="<%= employeeList[count].EMPLOYEE_ID %>update" type="submit">Update</button>
+                <td> <button id="<%= employeeList[count].EMPLOYEE_ID %>update" class="btn btn-primary" type="submit">Update</button>
                 </form>
             </tr>
             <% } %>
