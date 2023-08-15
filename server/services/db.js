@@ -6,7 +6,7 @@ const managerModel = require('../models/manager');
 const departmentModel = require('../models/department');
 
 const dbConfig = {
-    user: 'COMP214_m23_er_55',
+    user: 'COMP214_m23_er_78',
     password: 'password',
     connectString: '199.212.26.208:1521/SQLD'
   };
@@ -185,26 +185,25 @@ const dbConfig = {
     let connection;
     let jobID = +job.JOB_ID;
     let jobTitle = +job.JOB_TITLE;
-    let minSal = +job.MIN_SALARY;
-    let maxSal = +job.MAX_SALARY;
+    let minSal = job.MIN_SALARY;
+    
     console.log(job);
     console.log(jobID);
     console.log(jobTitle);
     console.log(minSal);
-    console.log(maxSal);
+    
 
     try {
       connection = await oracledb.getConnection(dbConfig);
 
       const result = await connection.execute(
         `BEGIN
-          Create_Job_sp(:p_job_id, :p_job_title, :p_min_salary, :p_max_salary);
+          NEW_job(:p_job_id, :p_job_title, :p_min_salary);
         END;`,
         {// bind variables
           p_job_id: {dir: oracledb.BIND_IN, val: job.JOB_ID, type:oracledb.STRING},
           p_job_title: {dir: oracledb.BIND_IN, val: job.JOB_TITLE, type:oracledb.STRING},
           p_min_salary: {dir: oracledb.BIND_IN, val: job.MIN_SALARY, type:oracledb.NUMBER},
-          p_max_salary: {dir: oracledb.BIND_IN, val: job.MAX_SALARY, type:oracledb.NUMBER},
         }
       );
 
