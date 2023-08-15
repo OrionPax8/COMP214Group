@@ -231,7 +231,7 @@ async function updateEmployee(employee){
   try {
     connection = await oracledb.getConnection(dbConfig);
 
-    const result = await connection.execute(
+    const result = await connection.execute();
       } catch (error) {
         console.error('Error inserting employee:', error);
         throw error;
