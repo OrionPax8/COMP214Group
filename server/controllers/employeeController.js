@@ -1,7 +1,9 @@
 const employeeModel = require('../models/employee');
 const managerModel = require('../models/manager');
 const jobModel = require('../models/job');
-const {getAllEmployees, getManagers, getDepartments, getAllJobs} = require('../services/db');
+const employee = employeeModel.Employee;
+const {getAllEmployees, getManagers, getDepartments, getAllJobs, insertEmployee} = require('../services/db');
+const Employee = require('../models/employee');
 
 const getEmployeeList = async (req, res, next) => {
   try {
@@ -38,6 +40,24 @@ const getHirePage = async (req, res, next) => {
 
 }
 
+const postHirePage = async (req, res, next) =>{
+
+  let newEmployee = new Employee({
+    FIRST_NAME: req.body.firstName,
+    LAST_NAME: req.body.lastName,
+    EMAIL: req.body.email,
+    PHONE_NUMBER: req.body.phone,
+    HIRE_DATE: req.body.hireDate,
+    JOB_ID: req.body.jobID,
+    SALARY: req.body.salary,
+    MANAGER_ID: req.body.managerID,
+    DEPARTMENT_ID: req.body.deptID,
+  });
+
+  //console.log(newEmployee);
+  insertEmployee(newEmployee);
+}
 
 
-module.exports = { getEmployeeList, getHirePage };
+
+module.exports = { getEmployeeList, getHirePage, postHirePage };

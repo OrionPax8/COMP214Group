@@ -5,4 +5,6 @@ const employeeController = require('../controllers/employeeController');
 router.get('/list', employeeController.getEmployeeList);
 router.get('/hire', employeeController.getHirePage);
 
+router.post('/hire', employeeController.postHirePage);
+
 module.exports = router;

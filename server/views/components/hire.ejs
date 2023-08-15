@@ -41,7 +41,7 @@
 
             <div class="form-group">
               <label for="jobIDField">Job ID</label>
-              <select class="form-control" id="jobIDField"
+              <select class="form-control" id="jobID"
               name="jobID" required>
                 <option value="Placeholder">Select Job Title</option>
                 <% for(let count = 0; count < jobList.length; count++){%>
@@ -60,9 +60,9 @@
           <fieldset>
             <legend>Manager</legend>
             <div class="form-group">
-              <label for="managerNameField">Manager Name</label>
-              <select class="form-control" id="managerNameField"
-              name="managerName" required>
+              <label for="managerIDField">Manager Name</label>
+              <select class="form-control" id="managerID"
+              name="managerID" required>
                 <option value="Placeholder">Select Manager Name</option>
                 <% for(let count = 0; count < managerList.length; count++){%>
                   <option value="<%= managerList[count].EMPLOYEE_ID %>"><%= managerList[count].LAST_NAME %>, <%= managerList[count].FIRST_NAME %></option>
@@ -73,9 +73,9 @@
             <fieldset>
             <legend>Department</legend>
             <div class="form-group">
-              <label for="deptNameField">Department</label>
-              <select class="form-control" id="deptNameField"
-              name="deptName" required>
+              <label for="deptIDField">Department</label>
+              <select class="form-control" id="deptID"
+              name="deptID" required>
                 <option value="Placeholder">Select Department</option>
                 <% for(let count = 0; count < departmentList.length; count++){%>
                   <option value="<%= departmentList[count].DEPARTMENT_ID %>"><%= departmentList[count].DEPARTMENT_NAME %></option>
@@ -88,7 +88,7 @@
           <br>
           <button class="btn btn-primary" type="submit"> Submit</button>
 
-          <a href="/contact-list" class="btn btn-warning"> Cancel</a>
+          <a href="/" class="btn btn-warning"> Cancel</a>
           </fieldset>
         </form>
         <br><br><br><br>

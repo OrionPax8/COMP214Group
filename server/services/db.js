@@ -95,7 +95,7 @@ const dbConfig = {
         await rs.close();
       return managerList;
     } catch (error) {
-      console.error('Error retrieving jobs:', error);
+      console.error('Error retrieving managers:', error);
       throw error;
     } finally {
       if (connection) {
@@ -126,7 +126,7 @@ const dbConfig = {
         await rs.close();
       return departmentList;
     } catch (error) {
-      console.error('Error retrieving jobs:', error);
+      console.error('Error retrieving departments:', error);
       throw error;
     } finally {
       if (connection) {
@@ -139,5 +139,52 @@ const dbConfig = {
     }
   }
 
+  async function insertEmployee(employee) {
+    let connection;
+    let hireDate = new Date(employee.HIRE_DATE);
+    let salary = +employee.SALARY;
+    let managerID = +employee.MANAGER_ID;
+    let deptID = +employee.DEPARTMENT_ID;
+    console.log(employee);
+    console.log(hireDate);
+    console.log(salary);
+    console.log(managerID);
+    console.log(deptID);
 
-module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments };
+    try {
+        connection = await oracledb.getConnection(dbConfig);
+
+        const result = await connection.execute(
+          `BEGIN
+            Employee_hire_sp(:p_first_name, :p_last_name, :p_email, :p_salary, :p_hire_date, :p_phone, :p_job_id, :p_manager_id, :p_department_id);
+          END;`,
+          {// bind variables
+            p_first_name: {dir: oracledb.BIND_IN, val: employee.FIRST_NAME, type:oracledb.STRING},
+            p_last_name: {dir: oracledb.BIND_IN, val: employee.LAST_NAME, type:oracledb.STRING},
+            p_email: {dir: oracledb.BIND_IN, val: employee.EMAIL, type:oracledb.STRING},
+            p_salary: {dir: oracledb.BIND_IN, val: salary, type:oracledb.NUMBER},
+            p_hire_date: {dir: oracledb.BIND_IN, val: hireDate, type:oracledb.DATE},
+            p_phone: {dir: oracledb.BIND_IN, val: employee.PHONE_NUMBER, type:oracledb.STRING},
+            p_job_id: {dir: oracledb.BIND_IN, val: employee.JOB_ID, type:oracledb.STRING},
+            p_manager_id: {dir: oracledb.BIND_IN, val: managerID, type:oracledb.NUMBER},
+            p_department_id: {dir: oracledb.BIND_IN, val: deptID, type:oracledb.NUMBER}
+          }
+        );
+
+        console.log("Rows inserted " + result.rowsAffected);
+      } catch (error) {
+        console.error('Error inserting employee:', error);
+        throw error;
+      } finally {
+        if (connection) {
+          try {
+            await connection.close();
+          } catch (error) {
+            console.error('Error closing connection:', error);
+          }
+        }
+      }
+  }
+
+
+module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee };
