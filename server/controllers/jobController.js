@@ -59,4 +59,18 @@ const getJobList = async (req, res, next) => {
     createJob(newJob);
   }
 
-module.exports = { getJobList, getJobEditPage, getCreateJobPage, postCreateJobPage };
+  const getViewJobPage = async (req, res, next) => {
+    let jobList = await getAllJobs();
+    try {      
+      res.render('index', {
+        jobList
+        ,title: 'View Job'
+        ,component: 'viewjob' })
+  
+    } catch (err){
+      console.log(err);
+  
+    }
+  }
+
+module.exports = { getJobList, getJobEditPage, getCreateJobPage, postCreateJobPage, getViewJobPage };

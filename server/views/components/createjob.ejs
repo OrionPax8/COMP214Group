@@ -1,23 +1,23 @@
 <div class="container">
     <div class="row">
       <div class="offset-md-4 col-md-4">
-            <form class="form" method="POST">
-                <fieldset>
-                    <legend>Job Description</legend>
-                    <div>
-                        <label for="jobIDField">Job ID</label>
-                        <input type="text" class="form-control" id="jobIDField"
-                        name="jobID" required>
-                    </div> 
-                </fieldset>
-                
-                <fieldset>                
-                <div >
-                    <label for="jobTitleField">Job Title</label>
-                    <input type="text" class="form-control" id="jobTitleField"
-                    name="jobTitle" >
+        <form class="form" method="POST">
+            <fieldset>
+                <legend>Job Description</legend>
+                <div>
+                    <label for="jobIDField">Job ID</label>
+                    <input type="text" class="form-control" id="jobIDField"
+                    name="jobID" required>
                 </div> 
-                </fieldset>
+            </fieldset>
+            
+            <fieldset>                
+            <div >
+                <label for="jobTitleField">Job Title</label>
+                <input type="text" class="form-control" id="jobTitleField"
+                name="jobTitle" readonly>
+            </div> 
+            </fieldset>
 
                 <fieldset>
                     <div >
@@ -26,15 +26,7 @@
                         name="minSal" >
                     </div> 
                 </fieldset>
-
-                <fieldset>
-                    <div >
-                        <label for="maxSalField">Max Salary</label>
-                        <input type="text" class="form-control" id="maxSalField"
-                        name="maxSal" >
-                    </div> 
-                </fieldset>
-
+                <br><br>
                 <fieldset class="form-group text-right">
                     <input type="submit" class="btn btn-success" value="Create Job">
                     <a href="/">

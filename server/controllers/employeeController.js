@@ -2,7 +2,7 @@ const employeeModel = require('../models/employee');
 const managerModel = require('../models/manager');
 const jobModel = require('../models/job');
 const employee = employeeModel.Employee;
-const {getAllEmployees, getManagers, getDepartments, getAllJobs, insertEmployee} = require('../services/db');
+const {getAllEmployees, getManagers, getDepartments, getAllJobs, insertEmployee, updateEmployee} = require('../services/db');
 const Employee = require('../models/employee');
 
 const getEmployeeList = async (req, res, next) => {
@@ -74,7 +74,9 @@ const postEmployeeListPage = async (req,res,next) =>{
     EMAIL: req.body.emailField
   })
 
-  res.redirect('/employee/list/' + id);
+  updateEmployee(employeeToUpdate);
+
+  
 }
 
 

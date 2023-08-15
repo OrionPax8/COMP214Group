@@ -4,6 +4,8 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 // Database Setup
 // const {connectDB} = require('../services/db');
@@ -30,6 +32,14 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 app.use('/', indexRouter);
 app.use('/employee', employeeRouter);
 app.use('/job', jobRouter);
+
+app.use(session({
+  secret:'COMP214',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(flash());
 
 
 // catch 404 and forward to error handler

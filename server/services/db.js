@@ -183,14 +183,7 @@ const dbConfig = {
 
   async function createJob(job){
     let connection;
-    let jobID = +job.JOB_ID;
-    let jobTitle = +job.JOB_TITLE;
     let minSal = job.MIN_SALARY;
-    
-    console.log(job);
-    console.log(jobID);
-    console.log(jobTitle);
-    console.log(minSal);
     
 
     try {
@@ -198,12 +191,12 @@ const dbConfig = {
 
       const result = await connection.execute(
         `BEGIN
-          NEW_job(:p_job_id, :p_job_title, :p_min_salary);
+          new_job(:p_job_id, :p_job_title, :p_min_salary);
         END;`,
         {// bind variables
           p_job_id: {dir: oracledb.BIND_IN, val: job.JOB_ID, type:oracledb.STRING},
           p_job_title: {dir: oracledb.BIND_IN, val: job.JOB_TITLE, type:oracledb.STRING},
-          p_min_salary: {dir: oracledb.BIND_IN, val: job.MIN_SALARY, type:oracledb.NUMBER},
+          p_min_salary: {dir: oracledb.BIND_IN, val: minSal, type:oracledb.NUMBER},
         }
       );
 
@@ -227,10 +220,21 @@ const dbConfig = {
 async function updateEmployee(employee){
   let connection;
   let salary = +employee.SALARY;
+  let empID = +employee.EMPLOYEE_ID;
   try {
     connection = await oracledb.getConnection(dbConfig);
 
-    const result = await connection.execute();
+    const result = await connection.execute(
+      `BEGIN
+        update_employee(:p_employee_id, :p_salary, :p_email, :p_phone)
+      END;`,
+      {// bind variables
+        p_employee_id: {dir: oracledb.BIND_IN, val: empID, type: oracledb.NUMBER},
+        p_salary: {dir: oracledb.BIND_IN, val: salary, type: oracledb.NUMBER},
+        p_email: {dir: oracledb.BIND_IN, val: employee.EMAIL, type:oracledb.STRING},
+        p_phone: {dir: oracledb.BIND_IN, val: employee.PHONE_NUMBER, type:oracledb.STRING}
+      });
+    console.log("Employees Updated: " + result.rowsAffected);
       } catch (error) {
         console.error('Error inserting employee:', error);
         throw error;
