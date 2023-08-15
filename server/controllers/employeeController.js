@@ -54,10 +54,29 @@ const postHirePage = async (req, res, next) =>{
     DEPARTMENT_ID: req.body.deptID,
   });
 
-  //console.log(newEmployee);
   insertEmployee(newEmployee);
+}
+
+const postEmployeeListPage = async (req,res,next) =>{
+
+  let id = req.params.id;
+
+  console.log(req.body);
+  console.log(req.body.salaryField);
+
+
+  
+
+  let employeeToUpdate = new Employee({
+    EMPLOYEE_ID: id,
+    SALARY: req.body.salaryField,
+    PHONE_NUMBER: req.body.phoneField,
+    EMAIL: req.body.emailField
+  })
+
+  res.redirect('/employee/list/' + id);
 }
 
 
 
-module.exports = { getEmployeeList, getHirePage, postHirePage };
+module.exports = { getEmployeeList, getHirePage, postHirePage, postEmployeeListPage };
