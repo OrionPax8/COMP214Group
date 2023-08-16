@@ -55,6 +55,8 @@ const postHirePage = async (req, res, next) =>{
   });
 
   insertEmployee(newEmployee);
+
+  res.redirect('/employee/hire');
 }
 
 const postEmployeeListPage = async (req,res,next) =>{
