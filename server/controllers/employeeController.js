@@ -53,10 +53,15 @@ const postHirePage = async (req, res, next) =>{
     MANAGER_ID: req.body.managerID,
     DEPARTMENT_ID: req.body.deptID,
   });
+  try{
+    await insertEmployee(newEmployee);
+    res.redirect('/employee/list');
+  }
+  catch(error){
+    console.log(error);
+  }
 
-  insertEmployee(newEmployee);
-
-  res.redirect('/employee/hire');
+  
 }
 
 const postEmployeeListPage = async (req,res,next) =>{
@@ -72,8 +77,13 @@ const postEmployeeListPage = async (req,res,next) =>{
     EMAIL: req.body.emailField
   })
 
-  updateEmployee(employeeToUpdate);
-
+  try{
+    await updateEmployee(employeeToUpdate);
+    res.redirect('/employee/list');
+  }
+  catch(error){
+    console.log(error);
+  }
   
 }
 

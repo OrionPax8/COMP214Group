@@ -1,9 +1,9 @@
 <div class="container">
-    <h1>Display Job Details</h1>
+    <h1>Identify JOB Description</h1>
     <div class="form-group">
-        <label for="jobID">Select Job ID:</label>
+        <label class="mb-2" for="jobID">Select Job ID:</label>
         <select class="form-control" id="jobIDSelected" name="jobID" required>
-            <option value="" disabled selected>Select a Job ID</option>
+            <option value="" disabled selected>Job ID</option>
             <!-- Loop through job IDs from database and create options -->
             <% for(let i = 0; i < jobList.length; i++) { %>
                 <option value="<%= [jobList[i].JOB_TITLE,jobList[i].MIN_SALARY,jobList[i].MAX_SALARY] %>"><%= jobList[i].JOB_ID %></option>
@@ -11,8 +11,8 @@
         </select>
     </div>
 
-        <button type="button" class="btn btn-primary" onclick="displayJobDetail()">Display</button>
-        <div id="jobDetail"> </div>
+    <button type="button" class="btn btn-primary mt-4" onclick="displayJobDetail()">Display</button>
+    <div id="jobDetail"></div>
 </div>
 <script>
     function displayJobDetail() {
@@ -22,11 +22,24 @@
         console.log(selectedJobID);
         
         // Find the job details in jobList using selectedJobID        
-        if (selectedJobID) {
+        if (selectedJobID[0] && selectedJobID[1] && selectedJobID[2]) {
             detail.innerHTML = `
-                <p><strong>Job Title:</strong> ${selectedJobID[0]}</p>
-                <p><strong>Minimum Salary:</strong> $${selectedJobID[1]}</p>
-                <p><strong>Maximum Salary:</strong> $${selectedJobID[2]}</p>
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Min Salary</th>
+                        <th>Max Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${selectedJobID[0]}</td>
+                        <td>$${selectedJobID[1]}</td>
+                        <td>$${selectedJobID[2]}</td>
+                    </tr>
+                </tbody>
+            </table>
             `;
         } else {
             detail.innerHTML = "<p>Please select a valid Job ID.</p>";

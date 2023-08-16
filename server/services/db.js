@@ -21,7 +21,7 @@ const dbConfig = {
     try {
         connection = await oracledb.getConnection(dbConfig);
 
-        const sql = `SELECT * FROM HR_EMPLOYEES`;
+        const sql = `SELECT * FROM HR_EMPLOYEES ORDER BY EMPLOYEE_ID desc`;
         const result = await connection.execute(sql, binds, options);
         const rs = result.resultSet;
         const employeeList = [];

@@ -1,6 +1,4 @@
 const Job = require('../models/job');
-const jobModel = require('../models/job');
-const job = jobModel.Job;
 const {getAllJobs, createJob, updateJob} = require('../services/db');
 
 
@@ -27,8 +25,13 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
       MIN_SALARY: req.body.minSalaryField,
       MAX_SALARY: req.body.maxSalaryField
     });
-
-    updateJob(jobToUpdate);
+    try{
+      await updateJob(jobToUpdate);
+      res.redirect('/job/editjobs');
+    }
+    catch(error){
+      console.log(error);
+    }
 
     
   }
@@ -56,9 +59,13 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
       MIN_SALARY: req.body.minSal      
     });
   
-    
-    createJob(newJob);
-    res.redirect('/job/createjob');
+    try{
+      await createJob(newJob);
+      res.redirect('/job/editjobs');
+    }
+    catch(error){
+      console.log(error);
+    }
   }
 
   const getViewJobPage = async (req, res, next) => {
