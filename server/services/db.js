@@ -183,7 +183,7 @@ const dbConfig = {
 
   async function createJob(job){
     let connection;
-    let minSal = job.MIN_SALARY;
+    let minSal = +job.MIN_SALARY;
     
 
     try {

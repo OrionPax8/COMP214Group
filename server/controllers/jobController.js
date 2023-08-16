@@ -29,6 +29,8 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
     });
 
     updateJob(jobToUpdate);
+
+    
   }
 
   const getCreateJobPage = async (req, res, next) => {
@@ -48,15 +50,15 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
 
   const postCreateJobPage = async (req, res, next) =>{
 
-    let newJob = new job({
+    let newJob = new Job({
       JOB_ID: req.body.jobID,
       JOB_TITLE: req.body.jobTitle,
-      MIN_SALARY: req.body.minSal,
-      MAX_SALARY: req.body.maxSal,      
+      MIN_SALARY: req.body.minSal      
     });
   
     
     createJob(newJob);
+    res.redirect('/job/createjob');
   }
 
   const getViewJobPage = async (req, res, next) => {
