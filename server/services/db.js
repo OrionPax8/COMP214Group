@@ -225,19 +225,6 @@ async function updateEmployee(employee){
   try {
     connection = await oracledb.getConnection(dbConfig);
 
-    const salaryTest = await connection.execute(
-      `BEGIN
-        :ret := f_check_salary(:p_job_id, :p_salary);
-      END;`,
-      {
-        p_job_id: {dir: oracledb.BIND_IN, val: employee.JOB_ID, type: oracledb.STRING},
-        p_salary: {dir: oracledb.BIND_IN, val: salary, type: oracledb.NUMBER},
-        ret: {dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 255}
-      }
-    );
-
-      console.log(salaryTest.outBinds.ret);
-
     const result = await connection.execute(
       `BEGIN
         update_employee(:p_employee_id, :p_salary, :p_email, :p_phone);
@@ -297,4 +284,39 @@ async function updateEmployee(employee){
     }
  }
 
-module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, updateEmployee, createJob, updateJob };
+ 
+ async function getSalaryMessage(employee){
+  let connection;
+  let salary = + employee.SALARY;
+
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const salaryTest = await connection.execute(
+      `BEGIN
+        check_salary(:p_job_id, :p_salary, :p_error_message);
+      END;`,
+      {
+        p_job_id: {dir: oracledb.BIND_IN, val: employee.JOB_ID, type: oracledb.STRING},
+        p_salary: {dir: oracledb.BIND_IN, val: salary, type: oracledb.NUMBER},
+        p_error_message: {dir: oracledb.BIND_OUT, type: oracledb.STRING}
+      }
+    );
+
+    return salaryTest.outBinds.p_error_message;
+
+  } catch (error) {
+    console.error('Error inserting employee:', error);
+    throw error;
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (error) {
+        console.error('Error closing connection:', error);
+      }
+    }
+  }
+}
+
+module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, updateEmployee, createJob, updateJob, getSalaryMessage };

@@ -7,6 +7,7 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
     try {      
       res.render('index', {
         jobList
+        ,messages: req.flash()
         ,title: 'Edit Jobs'
         ,component: 'editjobs' })
   
@@ -27,6 +28,7 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
     });
     try{
       await updateJob(jobToUpdate);
+      req.flash('success', 'Update Sucessful!')
       res.redirect('/job/editjobs');
     }
     catch(error){
@@ -42,6 +44,7 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
     try {      
       res.render('index', {
         jobList
+        ,messages: req.flash()
         ,title: 'Edit Jobs'
         ,component: 'createjob' })
   
@@ -61,7 +64,8 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
   
     try{
       await createJob(newJob);
-      res.redirect('/job/editjobs');
+      req.flash('success', 'Job Created')
+      res.redirect('/job/createjob');
     }
     catch(error){
       console.log(error);

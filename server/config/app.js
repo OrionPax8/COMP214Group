@@ -29,10 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
-app.use('/', indexRouter);
-app.use('/employee', employeeRouter);
-app.use('/job', jobRouter);
-
 app.use(session({
   secret:'COMP214',
   saveUninitialized: true,
@@ -41,6 +37,9 @@ app.use(session({
 
 app.use(flash());
 
+app.use('/', indexRouter);
+app.use('/employee', employeeRouter);
+app.use('/job', jobRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

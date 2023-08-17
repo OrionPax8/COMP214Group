@@ -2,15 +2,17 @@ const employeeModel = require('../models/employee');
 const managerModel = require('../models/manager');
 const jobModel = require('../models/job');
 const employee = employeeModel.Employee;
-const {getAllEmployees, getManagers, getDepartments, getAllJobs, insertEmployee, updateEmployee} = require('../services/db');
+const {getAllEmployees, getManagers, getDepartments, getAllJobs, insertEmployee, updateEmployee, verifySalary, getSalaryMessage} = require('../services/db');
 const Employee = require('../models/employee');
 
 const getEmployeeList = async (req, res, next) => {
   try {
+
     let employeeList = await getAllEmployees();
     res.render('index', {
-      employeeList
-      ,title: 'Employee List'
+      employeeList,
+      messages: req.flash(),
+      title: 'Employee List'
       , component: 'employees' })
 
   } catch (err){
@@ -30,6 +32,7 @@ const getHirePage = async (req, res, next) => {
       managerList
       ,departmentList
       ,jobList
+      ,messages: req.flash()
       ,title: 'Hire Employee'
       , component: 'hire' })
 
@@ -54,8 +57,16 @@ const postHirePage = async (req, res, next) =>{
     DEPARTMENT_ID: req.body.deptID,
   });
   try{
+    let salaryTest = await getSalaryMessage(newEmployee);
+
+    if(!salaryTest){
     await insertEmployee(newEmployee);
-    res.redirect('/employee/list');
+      req.flash('success', 'Hire Successful!');
+      res.redirect('/employee/hire');
+    } else {
+      req.flash('error', salaryTest);
+      res.redirect('/employee/hire');
+    }
   }
   catch(error){
     console.log(error);
@@ -79,8 +90,16 @@ const postEmployeeListPage = async (req,res,next) =>{
   })
 
   try{
+    let salaryTest = await getSalaryMessage(employeeToUpdate);
+
+    if(!salaryTest){
     await updateEmployee(employeeToUpdate);
+    req.flash('success', 'Update Successful!');
     res.redirect('/employee/list');
+    } else {
+      req.flash('error', salaryTest);
+      res.redirect('/employee/list');      
+    }
   }
   catch(error){
     console.log(error);

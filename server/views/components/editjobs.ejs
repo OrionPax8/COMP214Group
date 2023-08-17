@@ -1,9 +1,16 @@
   <!-- Main Content -->
+
+
   <main class="container">
     <div class="row">
         <div class="offset-md-1 col-md-11">
             <h1><%= title %></h1>
             <br>
+            <% if(messages.success){ %>
+                <div class="alert alert-success" role="alert">
+                    <%= messages.success %>
+                </div>
+            <% } %>
             <table class="table table-bordered table-striped table-hover">
                 <!-- Header Row -->
                 <table class="table">
@@ -22,9 +29,9 @@
             <tr> 
                 <form class="form" method="POST" action="/job/editjobs/<%= jobList[count].JOB_ID %>" onsubmit="return buttonFeedback()">
                 <td> <%= jobList[count].JOB_ID %> </td>
-                <td> <input type="text" class="form control" id="jobTitle<% count %>" name="jobTitleField" value="<%= jobList[count].JOB_TITLE %>"></td>
-                <td> <input type="text" class="form control" id="minSal<% count %>" name="minSalaryField" value="<%= jobList[count].MIN_SALARY %>"></td>
-                <td> <input type="text" class="form control" id="maxSal<% count %>" name="maxSalaryField" value="<%= jobList[count].MAX_SALARY %>"></td>
+                <td> <input type="text" class="form control" id="jobTitle<%= count %>" name="jobTitleField" value="<%= jobList[count].JOB_TITLE %>"></td>
+                <td> <input type="text" class="form control" id="minSal<%= count %>" name="minSalaryField" value="<%= jobList[count].MIN_SALARY %>"></td>
+                <td> <input type="text" class="form control" id="maxSal<%= count %>" name="maxSalaryField" value="<%= jobList[count].MAX_SALARY %>"></td>
                 <td><button type="submit" class="btn btn-primary">Update</button></td>
             </form>
             </tr>
@@ -35,9 +42,3 @@
         </div>
     </div>
   </main>
-  <script defer>
-    function buttonFeedback(){
-        window.alert('Request sent to Database');
-        return true;
-    };
-  </script>

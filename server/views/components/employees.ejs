@@ -5,6 +5,19 @@
         <div class="offset-md-1 col-md-11">
             <h1><%= title %></h1>
             <br>
+
+            <% if(messages.error){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= messages.error %>
+                </div>
+            <% } %>
+            <% if(messages.success){ %>
+                <div class="alert alert-success" role="alert">
+                    <%= messages.success %>
+                </div>
+            <% } %>
+
+            
             <table class="table table-bordered table-striped table-hover">
                 <!-- Header Row -->
                 <table class="table">
@@ -25,7 +38,7 @@
             <tbody>
             <% for(let count = 0; count < employeeList.length; count++){%>
             <tr> 
-                <form method="POST" action="/employee/list/<%= employeeList[count].EMPLOYEE_ID %>" onsubmit="return buttonFeedback()">
+                <form method="POST" action="/employee/list/<%= employeeList[count].EMPLOYEE_ID %>">
                 <td> <%= employeeList[count].EMPLOYEE_ID %></td>
                 <td> <%= employeeList[count].FIRST_NAME %></td>
                 <td> <%= employeeList[count].LAST_NAME %></td>
@@ -44,9 +57,3 @@
         </div>
     </div>
   </main>
-  <script defer>
-    function buttonFeedback(){
-        window.alert('Request sent to Database');
-        return true;
-    };
-  </script>
