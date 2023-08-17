@@ -20,7 +20,7 @@
             <tbody>
             <% for(let count = 0; count < jobList.length; count++){%>
             <tr> 
-                <form class="form" method="POST" action="/job/editjobs/<%= jobList[count].JOB_ID %>">
+                <form class="form" method="POST" action="/job/editjobs/<%= jobList[count].JOB_ID %>" onsubmit="return buttonFeedback()">
                 <td> <%= jobList[count].JOB_ID %> </td>
                 <td> <input type="text" class="form control" id="jobTitle<% count %>" name="jobTitleField" value="<%= jobList[count].JOB_TITLE %>"></td>
                 <td> <input type="text" class="form control" id="minSal<% count %>" name="minSalaryField" value="<%= jobList[count].MIN_SALARY %>"></td>
@@ -35,3 +35,9 @@
         </div>
     </div>
   </main>
+  <script defer>
+    function buttonFeedback(){
+        window.alert('Request sent to Database');
+        return true;
+    };
+  </script>

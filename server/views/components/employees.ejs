@@ -25,14 +25,14 @@
             <tbody>
             <% for(let count = 0; count < employeeList.length; count++){%>
             <tr> 
-                <form method="POST" action="/employee/list/<%= employeeList[count].EMPLOYEE_ID %>">
+                <form method="POST" action="/employee/list/<%= employeeList[count].EMPLOYEE_ID %>" onsubmit="return buttonFeedback()">
                 <td> <%= employeeList[count].EMPLOYEE_ID %></td>
                 <td> <%= employeeList[count].FIRST_NAME %></td>
                 <td> <%= employeeList[count].LAST_NAME %></td>
                 <td> <input type="text" class="form-control" id="email<%= employeeList[count].EMPLOYEE_ID %>" name="emailField" value="<%= employeeList[count].EMAIL %>"></td>
                 <td> <input type="text" class="form-control" id="phone<%= employeeList[count].EMPLOYEE_ID %>" name="phoneField" value="<%= employeeList[count].PHONE_NUMBER %>"></td>
                 <td> <%= employeeList[count].HIRE_DATE.toLocaleDateString('el-GR') %></td>
-                <td> <%= employeeList[count].JOB_ID %></td>
+                <td> <input type="text" class="form-control" id="jobID<%= employeeList[count].EMPLOYEE_ID %>" name="jobIDField" readonly value="<%= employeeList[count].JOB_ID %>"></td>
                 <td> <input type="text" class="form-control" id="salary<%= employeeList[count].EMPLOYEE_ID %>" name="salaryField" value="<%= employeeList[count].SALARY %>"></td>
                 <td> <button id="<%= employeeList[count].EMPLOYEE_ID %>update" class="btn btn-primary" type="submit">Update</button>
                 </form>
@@ -44,3 +44,9 @@
         </div>
     </div>
   </main>
+  <script defer>
+    function buttonFeedback(){
+        window.alert('Request sent to Database');
+        return true;
+    };
+  </script>

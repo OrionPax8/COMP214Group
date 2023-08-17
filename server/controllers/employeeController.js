@@ -74,7 +74,8 @@ const postEmployeeListPage = async (req,res,next) =>{
     EMPLOYEE_ID: id,
     SALARY: req.body.salaryField,
     PHONE_NUMBER: req.body.phoneField,
-    EMAIL: req.body.emailField
+    EMAIL: req.body.emailField,
+    JOB_ID: req.body.jobIDField
   })
 
   try{

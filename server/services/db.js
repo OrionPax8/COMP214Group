@@ -196,7 +196,7 @@ const dbConfig = {
         {// bind variables
           p_job_id: {dir: oracledb.BIND_IN, val: job.JOB_ID, type:oracledb.STRING},
           p_job_title: {dir: oracledb.BIND_IN, val: job.JOB_TITLE, type:oracledb.STRING},
-          p_min_salary: {dir: oracledb.BIND_IN, val: minSal, type:oracledb.NUMBER}
+          p_min_salary: {dir: oracledb.BIND_IN, val: minSal, type:oracledb.NUMBER} 
         }
       );
 
@@ -224,6 +224,19 @@ async function updateEmployee(employee){
 
   try {
     connection = await oracledb.getConnection(dbConfig);
+
+    const salaryTest = await connection.execute(
+      `BEGIN
+        :ret := f_check_salary(:p_job_id, :p_salary);
+      END;`,
+      {
+        p_job_id: {dir: oracledb.BIND_IN, val: employee.JOB_ID, type: oracledb.STRING},
+        p_salary: {dir: oracledb.BIND_IN, val: salary, type: oracledb.NUMBER},
+        ret: {dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 255}
+      }
+    );
+
+      console.log(salaryTest.outBinds.ret);
 
     const result = await connection.execute(
       `BEGIN
@@ -282,6 +295,6 @@ async function updateEmployee(employee){
         }
       }
     }
-}
+ }
 
 module.exports = { getAllEmployees, getAllJobs, getManagers, getDepartments, insertEmployee, updateEmployee, createJob, updateJob };
