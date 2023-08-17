@@ -8,7 +8,7 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
       res.render('index', {
         jobList
         ,messages: req.flash()
-        ,title: 'Edit Jobs'
+        ,title: 'Job List'
         ,component: 'editjobs' })
   
     } catch (err){
@@ -45,7 +45,7 @@ const {getAllJobs, createJob, updateJob} = require('../services/db');
       res.render('index', {
         jobList
         ,messages: req.flash()
-        ,title: 'Edit Jobs'
+        ,title: 'Create Job'
         ,component: 'createjob' })
   
     } catch (err){
